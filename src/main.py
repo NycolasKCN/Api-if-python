@@ -19,24 +19,32 @@ app = Flask(__name__)
 mangas_favs_test = [
 
     {
-        "id": "",
+        "id": 1,
         "name": "Solo Leveling",
         "url": "https://mangayabu.top/manga/solo-leveling/"
     },
     {
-        "id": "",
+        "id": 2,
         "name": "Kaijuu 8 gou",
         "url": "https://mangayabu.top/manga/kaijuu-8-gou/ "
     },
     {
-        "id": "",
+        "id": 3,
         "name": "Chainsaw Man",
-        "url ": "https://mangayabu.top/manga/chainsaw-man/ "
+        "url": "https://mangayabu.top/manga/chainsaw-man/ "
     },
     {
-        "id": "",
+        "id": 4,
         "name": "Aku no Hana",
-        "url ": "https://mangayabu.top/manga/aku-no-hana/ ",
+        "url": "https://mangayabu.top/manga/aku-no-hana/ ",
+    }
+]
+
+users = [
+    {
+        "id" : 1,
+        "username" : "nyco",
+        "mangaFavs" : []
     }
 ]
 
@@ -70,6 +78,15 @@ def removeMangaFavByName(name : str):
 
             return getMangasFavs()
     return "Nenhum mangá encontrado"
+
+
+# Endpoint que retorna as informações de um usert
+@app.route("/user/<username>", methods=["GET"]) # Isso aqui funciona
+def getUserInfo(username: str):
+    for user in users:
+        if user.get("username").lower() == username.lower():
+            return user
+    return "Nenhum usuário encontrado"
 
 
 app.run(host="localhost", port=8080, debug=True)
